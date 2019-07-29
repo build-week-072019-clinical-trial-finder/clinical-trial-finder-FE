@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 
+import { Button, Form } from 'semantic-ui-react'
+
+import '../pages/login.css'
+
 
 const Login = props => {
     const [input, setInput] = useState({
@@ -23,30 +27,39 @@ const Login = props => {
         });
       };
     return (
-        <form onSubmit={submitHandler}> 
-            <h1>Sign In</h1>
-            <div>
+        <Form onSubmit={submitHandler}> 
+            <h2>Sign In</h2>
+            <Form.Field>
                 <label htmlFor="Username">
-                    Username:{" "}
-                    <input
-                        type="text"
-                        value={input.name}
-                        onChange={inputHandler}
-                        name="username"
-                        />
+                    Username
                 </label>
-                <label htmlFor="Password">
-                    Password:{" "}
-                    <input
-                        type="text"
-                        value={input.password}
-                        onChange={inputHandler}
-                        name="password"
+                <input
+                    type="text"
+                    value={input.name}
+                    onChange={inputHandler}
+                    name="username"
+                    placeholder="Username"
                     />
+                
+                </Form.Field>
+                <Form.Field>
+                <label htmlFor="Password">
+                    Password
                 </label>
-                <button>Submit</button>
-            </div>
-        </form>
+                <input
+                    type="text"
+                    value={input.password}
+                    onChange={inputHandler}
+                    name="password"
+                    placeholder="Password"
+                />
+                
+                </Form.Field>
+                <Button color='black' type='submit'>Submit</Button>
+                <p>Don't have an account? <a href="#">Register</a></p> 
+
+            
+        </Form>
     )
 }
 
