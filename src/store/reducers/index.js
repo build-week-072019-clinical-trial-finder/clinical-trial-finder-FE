@@ -8,6 +8,7 @@ import {
   FETCH_START,
   FETCH_SUCCESS,
   FETCH_FAILURE,
+  LOGOUT
 } from '../actions/index';
 
 export const initialState = {
@@ -17,8 +18,8 @@ export const initialState = {
   isFetching: false,
   //isSaving: false,
   watchList: [],
-  error: null
-
+  error: null,
+  isLoggedIn: false
 }
 
 export const reducer = (state = initialState, action) => {
@@ -51,6 +52,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggingIn: false,
+        isLoggedIn: true,
         error: null
       };
     case LOGIN_FAILURE:
@@ -77,6 +79,16 @@ export const reducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error: action.payload
+      }
+    case LOGOUT:
+      return {
+        ...state,
+        trials: [],
+        isLoggingIn: false,
+        isRegistering: false,
+        isFetching: false,
+        error: null,
+        isLoggedIn: false
       }
     default: 
       return state;
