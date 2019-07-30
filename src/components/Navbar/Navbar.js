@@ -8,7 +8,10 @@ const Navbar = () => {
       <Menu>
         <Menu.Item>Brand</Menu.Item>
         <Menu.Menu position="right">
-          <Menu.Item as={NavLink} to="/register">
+          <Menu.Item as={NavLink} to="/login">
+            Login
+          </Menu.Item>
+          <Menu.Item as={NavLink} to="/registration">
             Register
           </Menu.Item>
         </Menu.Menu>
