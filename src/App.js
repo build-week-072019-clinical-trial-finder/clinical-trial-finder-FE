@@ -1,6 +1,8 @@
 import React from "react";
+import { Route } from 'react-router-dom';
 import Navbar from "./components/Navbar/Navbar";
-import Registration from "./pages/registration";
+import registration from "./pages/registration";
+import Home from './pages/Home';
 import Login from './pages/login'
 import './App.css';
 
@@ -9,8 +11,9 @@ const App = () => {
   return (
     <div className="App">
       <Navbar />
-      <Login />
-      <Route to="/registration" component={Registration} />
+      <Route exact path='/' component={Home} /> 
+      <Route path="/registration" component={registration} />
+      <Route path="/login" component={Login} />
     </div>
   );
 }
