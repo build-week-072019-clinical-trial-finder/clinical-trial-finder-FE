@@ -8,7 +8,7 @@ const Dashboard = () => {
 
     return(
         <div>
-            <h1>Dummy Data</h1>
+            <h1>Data</h1>
             <Cards />
         </div>
         
