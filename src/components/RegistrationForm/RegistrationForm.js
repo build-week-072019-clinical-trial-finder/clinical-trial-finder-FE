@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { register } from "../../store/actions/index";
+import styles from "../../assets/styles/theme.module.scss";
 
 import { Button, Header, Form, Message, Segment } from "semantic-ui-react";
 const Registration = () => {
@@ -105,7 +106,7 @@ const Registration = () => {
               <p>{passwordErrors}</p>
             </Message>
           )}
-          <Button color="teal" fluid size="large" type="submit">
+          <Button className={styles.buttons} fluid size="large" type="submit">
             Register
           </Button>
         </Segment>

@@ -1,0 +1,12 @@
+/* Color Palette */
+
+$primaryColor: #b9d6f2;
+// $accentColor:
+
+$buttonColor: #b80c09;
+$buttonText: #ffffff;
+
+.buttons {
+  background-color: $buttonColor !important;
+  color: $buttonText !important;
+}
