@@ -1,20 +1,31 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { connect } from 'react-redux';
+import { fetch } from '../../store/actions/index';
 import Title from "./Title"
 
-import { sampleData } from "../../dummyData"
+//import { sampleData } from "../../dummyData"
 
 const Cards = (props) => {
-    const [cardData, setCardData] = useState(sampleData)
+    //const [cardData, setCardData] = useState([])
 
-    console.log(cardData)
+    useEffect(() => {
+        props.fetch();
+    }, [])
+
+    console.log(props.trials);
+    
     return(
         <div>
-            {cardData.map((item, id) => (
-                    <Title title={item.title} key={id} />
+            {props.trials.map((item, id) => (
+                    <Title title={item['brief_title']} key={id} />
                     
             ))}
         </div>
     )
 }
 
-export default Cards;
+const mapStateToProps = (state) => ({
+    trials: state.trials,
+})
+
+export default connect(mapStateToProps, { fetch })(Cards);
