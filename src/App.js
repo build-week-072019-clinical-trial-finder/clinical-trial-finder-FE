@@ -1,13 +1,16 @@
-import React from 'react';
+import React from "react";
+import Navbar from "./components/Navbar/Navbar";
+import Registration from "./pages/registration";
 import Login from './pages/login'
-import NavBar from './components/NavBar';
 import './App.css';
+
 
 const App = () => {
   return (
     <div className="App">
-      <NavBar />
+      <Navbar />
       <Login />
+      <Route to="/registration" component={Registration} />
     </div>
   );
 }

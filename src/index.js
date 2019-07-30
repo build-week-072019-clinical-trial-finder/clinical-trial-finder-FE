@@ -7,6 +7,7 @@ import { logger } from 'redux-logger';
 
 import 'semantic-ui-css/semantic.min.css'
 import './index.css';
+import "semantic-ui-css/semantic.min.css";
 import App from './App';
 
 const store = createStore(reducer, applyMiddleware(thunk, logger))
