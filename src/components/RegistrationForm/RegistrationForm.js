@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { register } from "../../store/actions/index";
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { register } from '../../store/actions/index';
 
 import { Button, Header, Form, Message, Segment } from "semantic-ui-react";
-const Registration = () => {
+const Registration = (props) => {
   const [newUser, setNewUser] = useState({
     username: "",
     password: ""
