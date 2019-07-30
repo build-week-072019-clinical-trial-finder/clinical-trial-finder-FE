@@ -37,7 +37,7 @@ export const login = (credentials) => (dispatch) => {
     .then(response => {
       console.log('login success: ', response);
       dispatch({
-        type: LOGIN_SUCCESS, //will add later
+        type: LOGIN_SUCCESS
       })
       localStorage.setItem('token', response.data.token)
     })

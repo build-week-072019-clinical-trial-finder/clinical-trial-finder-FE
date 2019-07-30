@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+<<<<<<< HEAD
 import { register } from "../../store/actions/index";
 import styles from "../../assets/styles/theme.module.scss";
+=======
+import { withRouter } from 'react-router-dom';
+import { register } from '../../store/actions/index';
+>>>>>>> 9c350711767a0de2bd6b2ff091afaac83d5aa69d
 
 import { Button, Header, Form, Message, Segment } from "semantic-ui-react";
-const Registration = () => {
+const Registration = (props) => {
   const [newUser, setNewUser] = useState({
     username: "",
     password: ""
@@ -36,12 +41,15 @@ const Registration = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
     if (validateForm()) {
       console.log("Valid Form");
     } else {
       console.log("Invalid Form");
     }
+    console.log(newUser);
+    props.register(newUser)
+    resetForm();
+    props.history.push('/login');  
   };
 
   const handleInputChange = event => {
@@ -120,7 +128,4 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(
-  mapStateToProps,
-  { register }
-)(Registration);
+export default withRouter(connect(mapStateToProps, { register })(Registration));
