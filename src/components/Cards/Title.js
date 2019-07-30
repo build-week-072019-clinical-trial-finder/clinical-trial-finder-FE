@@ -1,9 +1,9 @@
 import React from "react";
 
 const Title = (props) => {
-    const {title}= props
+    
     return (
-        <h2>{title}</h2>
+        <h2>{props.title}</h2>
     )
 }
 

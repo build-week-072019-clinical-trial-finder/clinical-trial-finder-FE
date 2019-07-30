@@ -1,17 +1,15 @@
 import React, { useStete, useEffect } from "react"
 import axios from "axios"
-import Title from "./DashboardComponent/Title"
-import { sampleData } from "../dummyData"
+import Cards from "../components/Cards/Cards"
+
 
 const Dashboard = () => {
-    const [info, setInfo] = useStete([])
-    const [title, setTitle] = useStete(sampleData)
-
     
+
     return(
         <div>
             <h1>Dummy Data</h1>
-            
+            <Cards />
         </div>
         
     )
