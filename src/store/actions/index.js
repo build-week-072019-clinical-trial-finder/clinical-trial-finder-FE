@@ -8,12 +8,12 @@ export const register = (credentials) => (dispatch) => {
   dispatch({
     type: REGISTER_START
   })
-  axios.post()
+  return axios
+    .post('https://clincal-trials.herokuapp.com/api/register', credentials)
     .then(response => {
       console.log('register user success: ', response)
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: ''  //will add later
       })
     })
     .catch(error => {
@@ -33,13 +33,13 @@ export const login = (credentials) => (dispatch) => {
   dispatch({
     type: LOGIN_START
   })
-  axios.post()
+  axios.post('https://clincal-trials.herokuapp.com/api/login', credentials)
     .then(response => {
       console.log('login success: ', response);
       dispatch({
-        type: LOGIN_SUCCESS,
-        payload: '' //will add later
+        type: LOGIN_SUCCESS, //will add later
       })
+      localStorage.setItem('token', response.data.token)
     })
     .catch(error => {
       console.log('login error: ', error);

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { register } from '../../store/actions/index';
 
 import { Button, Form, Message, Segment } from "semantic-ui-react";
-const Registration = () => {
+const Registration = (props) => {
   const [newUser, setNewUser] = useState({
     username: "",
     password: ""
@@ -14,8 +16,9 @@ const Registration = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
     console.log(newUser);
+    props.register(newUser)
+    resetForm();
   };
 
   const handleInputChange = event => {
@@ -59,4 +62,9 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+const mapStateToProps = (state) => ({
+  isRegistering: state.isRegistering,
+  error: state.error
+})
+
+export default connect(mapStateToProps, { register })(Registration);

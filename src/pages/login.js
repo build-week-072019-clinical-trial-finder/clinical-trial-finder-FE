@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-
-import { Button, Form } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../store/actions/index';
+import { Button, Form } from 'semantic-ui-react';
 
 import '../pages/login.css'
 
@@ -8,22 +10,20 @@ import '../pages/login.css'
 const Login = props => {
     const [input, setInput] = useState({
         username: "",
-        password: "",
-        id: null
+        password: "",  
     })
-    const inputHandler = e => {
-        console.log("target name", e.target.name);
-        console.log("value", e.target.value);
+
+    const inputHandler = e  => {
+        //console.log("target name", e.target.name);
+        //console.log("value", e.target.value);
         setInput({ ...input, [e.target.name]: e.target.value });
       };
       const submitHandler = e => {
         e.preventDefault();
-        props.add({ ...input, id: Math.random() });
+        props.login(input);
         setInput({
-          name: "",
-          email: "",
-          role: "",
-          id: null
+          username: "",
+          password: "",
         });
       };
     return (
@@ -35,7 +35,7 @@ const Login = props => {
                 </label>
                 <input
                     type="text"
-                    value={input.name}
+                    value={input.username}
                     onChange={inputHandler}
                     name="username"
                     placeholder="Username"
@@ -56,11 +56,16 @@ const Login = props => {
                 
                 </Form.Field>
                 <Button color='black' type='submit'>Submit</Button>
-                <p>Don't have an account? <a href="#">Register</a></p> 
+                <p>Don't have an account? <Link to='/registration'>Register</Link></p> 
 
             
         </Form>
     )
 }
 
-export default Login
+const mapStateToProps = (state) => ({
+  isLoggingIn: state.isLoggingIn,
+  error: state.error,
+})
+
+export default connect(mapStateToProps, { login })(Login);
