@@ -55,7 +55,7 @@ const Login = props => {
             />
           </Form.Field>
           <Button color="black" type="submit">
-            Submit
+            <Link to="/Dashboard">Submit</Link>
           </Button>
           <p>
             Don't have an account? <Link to="/registration">Register</Link>
