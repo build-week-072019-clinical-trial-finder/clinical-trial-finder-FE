@@ -54,16 +54,20 @@ export const FETCH_START = 'FETCH_START';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
 
-export const fetch = (keywords) => (dispatch) => {
+export const fetch = () => (dispatch) => {
   dispatch({
     type: FETCH_START
   })
-  axios.get()
+  axios.post('http://clinical-trial-dev.p5ykpijgyk.us-east-2.elasticbeanstalk.com/fetch_data', {})
     .then(response => {
       console.log('fetch trials success: ', response)
+      let keys = Object.keys(response.data).filter(item => item !== 'status');
+      let ids = Object.keys(response.data[keys[0]]);
+      let data = ids.map(item => ({id: item}));
+      keys.forEach(key => data = data.map(item => ({...item, [key]: response.data[key][item.id]})))
       dispatch({
         type: FETCH_SUCCESS,
-        payload: '' //will add later
+        payload: data 
       })
     })
     .catch(error => {
