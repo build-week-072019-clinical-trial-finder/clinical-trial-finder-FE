@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { register } from "../../store/actions/index";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { register } from '../../store/actions/index';
 
 import { Button, Header, Form, Message, Segment } from "semantic-ui-react";
 const Registration = () => {
@@ -35,12 +38,15 @@ const Registration = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
     if (validateForm()) {
       console.log("Valid Form");
     } else {
       console.log("Invalid Form");
     }
+    console.log(newUser);
+    props.register(newUser)
+    resetForm();
+    props.history.push('/login');  
   };
 
   const handleInputChange = event => {
@@ -119,7 +125,4 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(
-  mapStateToProps,
-  { register }
-)(Registration);
+export default withRouter(connect(mapStateToProps, { register })(Registration));
