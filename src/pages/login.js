@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../store/actions/index";
-import { Button, Grid, Form } from "semantic-ui-react";
+import { Grid, Form } from "semantic-ui-react";
 
 import "../pages/login.css";
 
@@ -19,7 +19,7 @@ const Login = props => {
   };
   const submitHandler = e => {
     e.preventDefault();
-    props.login(input);
+    props.login(props.history, input);
     setInput({
       username: "",
       password: ""
@@ -54,9 +54,9 @@ const Login = props => {
               placeholder="Password"
             />
           </Form.Field>
-          <Button color="black" type="submit">
-            <Link to="/Dashboard">Submit</Link>
-          </Button>
+          <Form.Button color="black" type="submit">
+            Submit
+          </Form.Button>
           <p>
             Don't have an account? <Link to="/registration">Register</Link>
           </p>
@@ -71,7 +71,7 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { login }
-)(Login);
+)(Login));
