@@ -1,19 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
+import { Route } from 'react-router-dom';
 import Navbar from "./components/Navbar/Navbar";
-import Registration from "./pages/registration";
+import registration from "./pages/registration";
+import Home from './pages/Home';
+import Login from './pages/login'
+import './App.css';
 
-function App() {
+
+const App = () => {
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Switch>
-          <Route to="/registration" component={Registration} />
-        </Switch>
-      </div>
-    </Router>
+    <div className="App">
+      <Navbar />
+      <Route exact path='/' component={Home} /> 
+      <Route path="/registration" component={registration} />
+      <Route path="/login" component={Login} />
+    </div>
   );
 }
 
