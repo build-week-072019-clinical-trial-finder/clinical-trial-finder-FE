@@ -1,11 +1,11 @@
 import axios from "axios";
-import axiosWithAuth from '../../utilities/axiosWithAuth';
+//import axiosWithAuth from '../../utilities/axiosWithAuth';
 
 export const REGISTER_START = 'REGISTER_START';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 
-export const register = (credentials) => (dispatch) => {
+export const register = (history, credentials) => (dispatch) => {
   dispatch({
     type: REGISTER_START
   })
@@ -16,6 +16,7 @@ export const register = (credentials) => (dispatch) => {
       dispatch({
         type: REGISTER_SUCCESS,
       })
+      history.push('/login')
     })
     .catch(error => {
       console.log('register user error: ', error)

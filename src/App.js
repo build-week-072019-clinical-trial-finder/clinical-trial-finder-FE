@@ -22,7 +22,6 @@ const App = () => {
         <Route path="/login" component={Login} />
         <PrivateRoute path="/Dashboard" component={Dashboard} />
       </div>
-
     </div>
   );
 };
