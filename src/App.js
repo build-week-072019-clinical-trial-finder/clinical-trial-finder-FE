@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Login from "./pages/login";
 import Dashboard from "./pages/Dashboard";
 
-import styles from "./App.module.scss";
+import "./App.css";
 
 const App = () => {
   return (
