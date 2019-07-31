@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosWithAuth from '../../utilities/axiosWithAuth';
 
 export const REGISTER_START = 'REGISTER_START';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
