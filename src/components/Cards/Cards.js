@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { fetch } from "../../store/actions/index";
+import React from "react";
 import Title from "./Title";
 import Condition from "./Condition";
 import City from "./City";
@@ -10,15 +8,10 @@ import Summary from "./Summary";
 import Phase from "./Phase";
 import InverventionName from "./InterventionName";
 
-import { Card, Header, Table, Icon } from "semantic-ui-react";
+import { Card, Button, Header, Table, Icon } from "semantic-ui-react";
 import "./cards.css";
 
 const Cards = props => {
-  useEffect(() => {
-    props.fetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   console.log("props", props.trials);
 
   return (
@@ -51,6 +44,25 @@ const Cards = props => {
                 </div>
               </div>
             </Card.Content>
+            <Card.Content>
+              <div className="flex-box2">
+                {props.addTrial ? (
+                  <Button
+                    icon="find"
+                    content="Save to Watchlist"
+                    style={{ background: "#b80c09", color: "#ffffff" }}
+                    onClick={event => props.addTrial(event, item)}
+                  />
+                ) : (
+                  <Button
+                    icon="find"
+                    content="Remove from Watchlist"
+                    style={{ background: "#222e50", color: "#ffffff" }}
+                    onClick={event => props.removeTrial(event, item)}
+                  />
+                )}
+              </div>
+            </Card.Content>
           </Card>
         </Card.Group>
       ))}
@@ -58,11 +70,4 @@ const Cards = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  trials: state.trials
-});
-
-export default connect(
-  mapStateToProps,
-  { fetch }
-)(Cards);
+export default Cards;

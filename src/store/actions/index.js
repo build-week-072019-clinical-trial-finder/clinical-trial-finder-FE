@@ -89,3 +89,31 @@ export const logout = () => (dispatch) => {
     type: LOGOUT,
   })
 }
+
+export const FETCH_WATCHLIST = 'FETCH_WATCHLIST';
+
+export const fetchWatchlist = () => (dispatch) => {
+  let savedList = JSON.parse(localStorage.getItem('watchlist')) || [];
+  dispatch({
+    type: FETCH_WATCHLIST,
+    payload: savedList
+  })
+}
+
+export const ADD_TO_WATCHLIST = 'ADD_TO_WATCHLIST';
+
+export const addToWatchlist = (trial) => (dispatch) => {
+  dispatch({
+    type: ADD_TO_WATCHLIST,
+    payload: trial
+  })
+}
+
+export const REMOVE_FROM_WATCHLIST = 'REMOVE_FROM_WATCHLIST';
+
+export const removeFromWatchlist = (trial) => (dispatch) => {
+  dispatch({
+    type: REMOVE_FROM_WATCHLIST,
+    payload: trial.id
+  })
+}
