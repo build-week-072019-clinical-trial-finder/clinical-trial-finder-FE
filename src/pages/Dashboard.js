@@ -3,16 +3,17 @@ import axios from "axios";
 import Search from "../components/Search/Search";
 import Cards from "../components/Cards/Cards";
 
-import { Grid } from "semantic-ui-react";
+import { Card, Grid } from "semantic-ui-react";
 
 const Dashboard = () => {
   const searchContainerStyles = {
     marginTop: "4rem"
   };
+
   return (
     <div>
       <Grid textAlign="center" style={searchContainerStyles}>
-        <Grid.Column width="10">
+        <Grid.Column>
           <Search />
         </Grid.Column>
       </Grid>
