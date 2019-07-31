@@ -3,15 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../store/actions/index";
 
-import {
-  Button,
-  Card,
-  Header,
-  Grid,
-  Form,
-  Message,
-  CardContent
-} from "semantic-ui-react";
+import { Button, Card, Header, Grid, Form, Message } from "semantic-ui-react";
 
 // import "../pages/login.css";
 import styles from "./Login.module.scss";
@@ -36,7 +28,6 @@ const Login = props => {
     });
   };
   return (
-
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 400 }}>
         <Card className={styles.loginCard}>
@@ -77,42 +68,6 @@ const Login = props => {
             </Form>
           </Card.Content>
         </Card>
-
-    <Grid
-      textAlign="center"
-      style={{ height: "100vh " }}
-      verticalAlign="middle"
-    >
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Form onSubmit={submitHandler}>
-          <h2>Sign In</h2>
-          <Form.Field>
-            <label htmlFor="Username">Username</label>
-            <input
-              type="text"
-              value={input.username}
-              onChange={inputHandler}
-              name="username"
-              placeholder="Username"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor="Password">Password</label>
-            <input
-              type="text"
-              value={input.password}
-              onChange={inputHandler}
-              name="password"
-              placeholder="Password"
-            />
-          </Form.Field>
-          <Form.Button color="black" type="submit">
-            Submit
-          </Form.Button>
-          <p>
-            Don't have an account? <Link to="/registration">Register</Link>
-          </p>
-        </Form>
       </Grid.Column>
     </Grid>
   );
@@ -123,7 +78,9 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default withRouter(connect(
-  mapStateToProps,
-  { login }
-)(Login));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { login }
+  )(Login)
+);
