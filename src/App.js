@@ -1,9 +1,13 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route } from 'react-router-dom';
+import PrivateRoute from './utilities/PrivateRoute'; 
 import Navbar from "./components/Navbar/Navbar";
 import registration from "./pages/registration";
-import Home from "./pages/Home";
-import Login from "./pages/login";
+import Home from './pages/Home';
+import Login from './pages/login'
+import Dashboard from "./pages/Dashboard"
+import './App.css';
+
 
 import styles from "./assets/styles/theme.module.scss";
 // import "./App.css";
@@ -12,9 +16,13 @@ const App = () => {
   return (
     <div className={styles.app}>
       <Navbar />
-      <Route exact path="/" component={Home} />
-      <Route path="/registration" component={registration} />
-      <Route path="/login" component={Login} />
+      <div className='App-content'>
+        <Route exact path='/' component={Home} /> 
+        <Route path="/registration" component={registration} />
+        <Route path="/login" component={Login} />
+        <PrivateRoute path="/Dashboard" component={Dashboard} />
+      </div>
+
     </div>
   );
 };

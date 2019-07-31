@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosWithAuth from '../../utilities/axiosWithAuth';
 
 export const REGISTER_START = 'REGISTER_START';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -29,7 +30,7 @@ export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export const login = (credentials) => (dispatch) => {
+export const login = (history, credentials) => (dispatch) => {
   dispatch({
     type: LOGIN_START
   })
@@ -40,6 +41,7 @@ export const login = (credentials) => (dispatch) => {
         type: LOGIN_SUCCESS
       })
       localStorage.setItem('token', response.data.token)
+      history.push('/Dashboard')
     })
     .catch(error => {
       console.log('login error: ', error);
@@ -54,16 +56,20 @@ export const FETCH_START = 'FETCH_START';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
 
-export const fetch = (keywords) => (dispatch) => {
+export const fetch = () => (dispatch) => {
   dispatch({
     type: FETCH_START
   })
-  axios.get()
+  axios.post('http://clinical-trial-dev.p5ykpijgyk.us-east-2.elasticbeanstalk.com/fetch_data', {})
     .then(response => {
       console.log('fetch trials success: ', response)
+      let keys = Object.keys(response.data).filter(item => item !== 'status');
+      let ids = Object.keys(response.data[keys[0]]);
+      let data = ids.map(item => ({id: item}));
+      keys.forEach(key => data = data.map(item => ({...item, [key]: response.data[key][item.id]})))
       dispatch({
         type: FETCH_SUCCESS,
-        payload: '' //will add later
+        payload: data 
       })
     })
     .catch(error => {
