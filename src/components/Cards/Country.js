@@ -3,7 +3,7 @@ import React from "react";
 const Country = (props) => {
     
     return (
-        <p>{props.country}</p>
+        <h5>{props.country}</h5>
     )
 }
 

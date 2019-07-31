@@ -3,7 +3,7 @@ import React from "react";
 const InterventionName = (props) => {
     
     return (
-        <p>{props.intervention}</p>
+        <h4>Intervention: {props.intervention}</h4>
     )
 }
 

@@ -11,12 +11,12 @@ const Dashboard = () => {
   };
   return (
     <div>
-      {/* <Cards /> */}
       <Grid textAlign="center" style={searchContainerStyles}>
         <Grid.Column width="10">
           <Search />
         </Grid.Column>
       </Grid>
+      <Cards />
     </div>
   );
 };
