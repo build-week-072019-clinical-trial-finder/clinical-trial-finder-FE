@@ -10,7 +10,8 @@ import Summary from "./Summary"
 import Phase from "./Phase"
 import InverventionName from "./InterventionName"
 
-// import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Header, Table } from 'semantic-ui-react'
+import './cards.css'
 
 
 
@@ -27,17 +28,20 @@ const Cards = (props) => {
         <div>
             {props.trials.map((item, id) => (
                 
-                <div>
-                    <Condition condition={item['condition']} key={Math.random()} /> 
-                    <City city={item['city']} key={Math.random()} />
-                    <State state={item['state']} key={Math.random()} />
-                    <Country country={item['country']} key={Math.random()} />
-                    <Title title={item['brief_title']} key={Math.random()} />
-                    <Summary summary={item['brief_summary']} key={Math.random()} />
-                    <Phase phase={item['phase']} key={Math.random()} />
-                    <InverventionName intervention={item['intervention_name']} key={Math.random()} />
+                
+                <Card.Group centered>
+                    <Card fluid color='red'>
+                        <Title title={item['brief_title']} key={Math.random()} />
+                        <Summary summary={item['brief_summary']} key={Math.random()} />
+                        <Condition condition={item['condition']} key={Math.random()} />
+                        <Phase phase={item['phase']} key={Math.random()} />
+                        <InverventionName intervention={item['intervention_name']} key={Math.random()} />
+                        <City city={item['city']} key={Math.random()} />
+                        <State state={item['state']} key={Math.random()} />
+                        <Country country={item['country']} key={Math.random()} />
 
-                </div>
+                    </Card>
+                </Card.Group>
                 
             ))}
         </div>

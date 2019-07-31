@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { register } from "../../store/actions/index";
-import styles from "./RegistrationForm.module.scss";
+import styles from "./RegistrationForm.module.scss";  //do we need this?
 
 import {
   Button,
@@ -10,10 +10,18 @@ import {
   Header,
   Form,
   Message,
-  Segment
+  Segment,
+  Dimmer, 
+  Loader,
+  Image
 } from "semantic-ui-react";
 
 const Registration = props => {
+   let token = localStorage.getItem('token');
+   if (token) {
+     props.history.push('/Dashboard')
+   } 
+
   const [newUser, setNewUser] = useState({
     username: "",
     password: ""
@@ -47,15 +55,11 @@ const Registration = props => {
     event.preventDefault();
     if (validateForm()) {
       console.log("Valid Form");
+      props.register(props.history, newUser);
+      resetForm();
     } else {
       console.log("Invalid Form");
     }
-
-    //console.log(newUser);
-
-    props.register(newUser);
-    resetForm();
-    props.history.push("/login");
   };
 
   const handleInputChange = event => {
@@ -121,7 +125,7 @@ const Registration = props => {
             <Form.Field>
               <label htmlFor="password">Password</label>
               <input
-                type="text"
+                type="password"
                 name="password"
                 value={newUser.password}
                 onChange={handleInputChange}
@@ -134,10 +138,21 @@ const Registration = props => {
                 <p>{passwordErrors}</p>
               </Message>
             )}
+            {props.error && 
+              (<Message color="red">
+                <Message.Header>Registration error</Message.Header>
+                <p>{props.error}</p>
+              </Message>)}
             <Button className={styles.buttons} size="large" type="submit">
               Register
             </Button>
-            {/* </Segment> */}
+            {props.isRegistering && 
+              (<Segment>
+                <Dimmer active inverted>
+                  <Loader inverted>Registering</Loader>
+                </Dimmer>
+                <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+              </Segment>)}
           </Form>
         </Card.Content>
       </Card>

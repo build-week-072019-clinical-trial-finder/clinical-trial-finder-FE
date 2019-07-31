@@ -15,6 +15,7 @@ export const initialState = {
   trials: [],
   isLoggingIn: false,
   isRegistering: false,
+  isRegistered: false,
   isFetching: false,
   //isSaving: false,
   watchList: [],
@@ -34,6 +35,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isRegistering: false,
+        isRegistered: true,
         error: null
       }
     case REGISTER_FAILURE:
@@ -46,7 +48,8 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggingIn: true,
-        error: null
+        error: null,
+        isRegistered: false,
       };
     case LOGIN_SUCCESS:
       return {
