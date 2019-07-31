@@ -1,18 +1,24 @@
-import React, { useStete, useEffect } from "react"
-import axios from "axios"
-import Cards from "../components/Cards/Cards"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Search from "../components/Search/Search";
+import Cards from "../components/Cards/Cards";
 
+import { Grid } from "semantic-ui-react";
 
 const Dashboard = () => {
-    
-
-    return(
-        <div>
-            
-            <Cards />
-        </div>
-        
-    )
-}
+  const searchContainerStyles = {
+    marginTop: "4rem"
+  };
+  return (
+    <div>
+      <Grid textAlign="center" style={searchContainerStyles}>
+        <Grid.Column width="10">
+          <Search />
+        </Grid.Column>
+      </Grid>
+      <Cards />
+    </div>
+  );
+};
 
 export default Dashboard;

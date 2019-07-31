@@ -3,20 +3,23 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../store/actions/index";
 
-import { Button, Card, Header, Grid, Form, Message } from "semantic-ui-react";
+import { Button, Card, Header, Grid, Form, Message, Segment, Dimmer, Loader, Image } from "semantic-ui-react";
 
 // import "../pages/login.css";
 import styles from "./Login.module.scss";
 
 const Login = props => {
+  let token = localStorage.getItem('token');
+  if (token) {
+    props.history.push('/Dashboard')
+  } 
+
   const [input, setInput] = useState({
     username: "",
     password: ""
   });
 
   const inputHandler = e => {
-    //console.log("target name", e.target.name);
-    //console.log("value", e.target.value);
     setInput({ ...input, [e.target.name]: e.target.value });
   };
   const submitHandler = e => {
@@ -37,6 +40,11 @@ const Login = props => {
             </Header>
           </Card.Content>
           <Card.Content>
+            {props.isRegistered && 
+              (<Message color="green">
+                <Message.Header>Registration success</Message.Header>
+                <p>Please sign in with your credentials</p>
+              </Message>)}
             <Form onSubmit={submitHandler} className={styles.loginForm}>
               <Form.Field>
                 <label htmlFor="Username">Username</label>
@@ -51,17 +59,28 @@ const Login = props => {
               <Form.Field>
                 <label htmlFor="Password">Password</label>
                 <input
-                  type="text"
+                  type="password"
                   value={input.password}
                   onChange={inputHandler}
                   name="password"
                   placeholder="Password"
                 />
               </Form.Field>
+              {props.error && 
+              (<Message color="red">
+                <Message.Header>Sign in error</Message.Header>
+                <p>{props.error}</p>
+              </Message>)}
               <Button className={styles.buttons} type="submit">
                 Submit
               </Button>
-
+              {props.isLoggingIn && 
+              (<Segment>
+                <Dimmer active inverted>
+                  <Loader inverted>Signing In</Loader>
+                </Dimmer>
+                <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
+              </Segment>)}
               <Message>
                 Don't have an account? <Link to="/registration">Register</Link>
               </Message>
@@ -75,6 +94,7 @@ const Login = props => {
 
 const mapStateToProps = state => ({
   isLoggingIn: state.isLoggingIn,
+  isRegistered: state.isRegistered,
   error: state.error
 });
 

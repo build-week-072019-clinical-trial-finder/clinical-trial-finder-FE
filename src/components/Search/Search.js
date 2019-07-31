@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Container,
-  Form,
-  Grid,
-  Message,
-  Segment
-} from "semantic-ui-react";
+import { Button, Form, Input, Message } from "semantic-ui-react";
+
 import styles from "./Search.module.scss";
 
 const Search = () => {
@@ -22,51 +16,57 @@ const Search = () => {
     setQuery({ ...query, trial: value });
   };
 
-  console.log(query);
-
   const handleSubmitForm = event => {
     event.preventDefault();
+
     if (validateForm()) {
       console.log("Valid Form");
       /* IMPORTANT - Provide an API call here */
-    
+
+      resetForm();
+    }
   };
 
   const validateForm = () => {
     let valid = true;
 
     if (!query.trial) {
-      setQueryErrors("Invalid search keyword");
+      setQueryErrors("Invalid search keyword(s)");
       valid = false;
     }
 
     return valid;
   };
-
+  const resetForm = () => {
+    setQuery("");
+    setQueryErrors("");
+  };
   return (
     <div>
       <Form
         className={styles.searchForm}
-        size="large"
+        size="big"
         onSubmit={handleSubmitForm}
       >
-        <Form.Group>
-          <Form.Field inline>
-            <label htmlFor="query">Search</label>
-            <input
-              type="text"
-              name="query"
-              value={query.trial}
-              onChange={handleInputChange}
-              placeholder="Clinic Trials"
-            />
-          </Form.Field>
+        <Form.Input
+          type="text"
+          name="query"
+          value={query.trial}
+          onChange={handleInputChange}
+          placeholder="Clinical Trials"
+        />
 
-          <Button className={styles.buttons} type="submit">
-            Submit
-          </Button>
-        </Form.Group>
-        {queryErrors.length > 0 && <Message>{queryErrors}</Message>}
+        <Button className={styles.buttons} type="submit" size="large">
+          Search
+        </Button>
+
+        {queryErrors.length > 0 && (
+          <Message
+            color="red"
+            size="small"
+            header="Invalid search keyword(s)"
+          ></Message>
+        )}
       </Form>
     </div>
   );
