@@ -3,7 +3,7 @@ import React from "react";
 const Condition = (props) => {
     
     return (
-        <p>{props.condition}</p>
+        <h4>Condition: {props.condition}</h4>
     )
 }
 
