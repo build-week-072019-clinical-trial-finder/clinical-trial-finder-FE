@@ -89,3 +89,21 @@ export const logout = () => (dispatch) => {
     type: LOGOUT,
   })
 }
+
+export const ADD_TO_WATCHLIST = 'ADD_TO_WATCHLIST';
+
+export const addToWatchlist = (trial) => (dispatch) => {
+  dispatch({
+    type: ADD_TO_WATCHLIST,
+    payload: trial
+  })
+}
+
+export const REMOVE_FROM_WATCHLIST = 'REMOVE_FROM_WATCHLIST';
+
+export const removeFromWatchlist = (trialId) => (dispatch) => {
+  dispatch({
+    type: REMOVE_FROM_WATCHLIST,
+    payload: trialId
+  })
+}
