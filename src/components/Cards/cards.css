@@ -1,0 +1,13 @@
+/* body{
+    background-color: red;
+} */
+
+.ui.cards{
+    padding-top: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem
+}
+
+p{
+    font-size: 1rem;
+}
