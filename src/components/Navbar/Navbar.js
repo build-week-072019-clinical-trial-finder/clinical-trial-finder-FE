@@ -17,7 +17,7 @@ const Navbar = (props) => {
 
   return (
     <nav className="navbar">
-      <Menu style={{'background': '#007991'}}>
+      <Menu style={{'background': '#007991'}} fixed='top'>
         <Menu.Menu position='left'>
           <Header as='h3' image={logo} content='Clinical Trial Finder' style={{'color': 'white', 'paddingLeft': '10px'}}/>
         </Menu.Menu>
