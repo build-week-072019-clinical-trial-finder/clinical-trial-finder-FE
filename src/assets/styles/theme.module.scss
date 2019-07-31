@@ -1,10 +1,23 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css?family=PT+Sans+Narrow|Work+Sans&display=swap");
+
+/* Font Variables */
+$headingFont: "Work Sans", sans-serif;
+$bodyFont: "PT Sans Narrow", sans-serif;
 /* Color Palette */
 
 $primaryColor: #b9d6f2;
-// $accentColor:
+$secondaryColor: #007991;
+$accentColor: #00a6fb;
+$textColor: #222e50;
 
 $buttonColor: #b80c09;
 $buttonText: #ffffff;
+
+/* Generic components */
+.app {
+  background-color: $primaryColor;
+}
 
 .buttons {
   background-color: $buttonColor !important;

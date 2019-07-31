@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-<<<<<<< HEAD
+import { withRouter } from "react-router-dom";
 import { register } from "../../store/actions/index";
-import styles from "../../assets/styles/theme.module.scss";
-=======
-import { withRouter } from 'react-router-dom';
-import { register } from '../../store/actions/index';
->>>>>>> 9c350711767a0de2bd6b2ff091afaac83d5aa69d
+import styles from "./RegistrationForm.module.scss";
 
-import { Button, Header, Form, Message, Segment } from "semantic-ui-react";
-const Registration = (props) => {
+import {
+  Button,
+  Card,
+  Header,
+  Form,
+  Message,
+  Segment
+} from "semantic-ui-react";
+
+const Registration = props => {
   const [newUser, setNewUser] = useState({
     username: "",
     password: ""
@@ -46,10 +50,12 @@ const Registration = (props) => {
     } else {
       console.log("Invalid Form");
     }
-    console.log(newUser);
-    props.register(newUser)
+
+    //console.log(newUser);
+
+    props.register(newUser);
     resetForm();
-    props.history.push('/login');  
+    props.history.push("/login");
   };
 
   const handleInputChange = event => {
@@ -83,42 +89,58 @@ const Registration = (props) => {
 
   return (
     <div>
-      <Form size="large" onSubmit={handleSubmit}>
-        <Header as="h1">New User Registration</Header>
-        <Segment stacked>
-          <Form.Input
-            fluid
-            placeholder="Username"
-            type="text"
-            name="username"
-            value={newUser.username}
-            onChange={handleInputChange}
-          />
-          {userNameErrors.length > 0 && (
-            <Message color="red">
-              <Message.Header>Username error</Message.Header>
-              <p>{userNameErrors}</p>
-            </Message>
-          )}
-          <Form.Input
-            fluid
-            placeholder="Password"
-            type="password"
-            name="password"
-            value={newUser.password}
-            onChange={handleInputChange}
-          />
-          {passwordErrors.length > 0 && (
-            <Message color="red">
-              <Message.Header>Password error</Message.Header>
-              <p>{passwordErrors}</p>
-            </Message>
-          )}
-          <Button className={styles.buttons} fluid size="large" type="submit">
-            Register
-          </Button>
-        </Segment>
-      </Form>
+      <Card className={styles.registrationCard}>
+        <Card.Content className={styles.headerContainer}>
+          <Header as="h1" className={styles.header}>
+            New User Registration
+          </Header>
+        </Card.Content>
+        <Card.Content>
+          <Form
+            size="large"
+            onSubmit={handleSubmit}
+            className={styles.registrationForm}
+          >
+            {/* <Segment stacked> */}
+            <Form.Field>
+              <label>Username</label>
+              <input
+                placeholder="Username"
+                type="text"
+                name="username"
+                value={newUser.username}
+                onChange={handleInputChange}
+              />
+            </Form.Field>
+            {userNameErrors.length > 0 && (
+              <Message color="red">
+                <Message.Header>Username error</Message.Header>
+                <p>{userNameErrors}</p>
+              </Message>
+            )}
+            <Form.Field>
+              <label htmlFor="password">Password</label>
+              <input
+                type="text"
+                name="password"
+                value={newUser.password}
+                onChange={handleInputChange}
+                placeholder="Password"
+              />
+            </Form.Field>
+            {passwordErrors.length > 0 && (
+              <Message color="red">
+                <Message.Header>Password error</Message.Header>
+                <p>{passwordErrors}</p>
+              </Message>
+            )}
+            <Button className={styles.buttons} size="large" type="submit">
+              Register
+            </Button>
+            {/* </Segment> */}
+          </Form>
+        </Card.Content>
+      </Card>
     </div>
   );
 };
@@ -128,4 +150,9 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default withRouter(connect(mapStateToProps, { register })(Registration));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { register }
+  )(Registration)
+);
