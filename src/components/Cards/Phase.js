@@ -3,7 +3,7 @@ import React from "react";
 const Phase = (props) => {
     
     return (
-        <p>{props.phase}</p>
+        <h4>Phrase: {props.phase}</h4>
     )
 }
 
