@@ -6,10 +6,12 @@ import registration from "./pages/registration";
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import Dashboard from "./pages/Dashboard";
+import Watchlist from './pages/Watchlist';
 
 import "./App.css";
 
 const App = () => {
+  
   return (
     <div className="App">
       <Navbar />
@@ -18,6 +20,7 @@ const App = () => {
         <Route path="/registration" component={registration} />
         <Route path="/login" component={Login} />
         <PrivateRoute path="/Dashboard" component={Dashboard} />
+        <PrivateRoute path='/watchlist' component={Watchlist} />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { logout } from '../../store/actions/index';
 import logo from '../../images/logo-white.png';
 
 const Navbar = (props) => {
-  let token = localStorage.getItem('token') || null;
+  let token = localStorage.getItem('token');
 
   const logout = (event) => {
     event.preventDefault();
@@ -23,6 +23,9 @@ const Navbar = (props) => {
         </Menu.Menu>
         {props.isLoggedIn || token ? (
           <Menu.Menu position="right">
+            <Menu.Item as={NavLink} to="/watchlist" style={{'color': 'white'}}>
+              Watchlist
+            </Menu.Item>
             <Menu.Item as={NavLink} to="/" onClick={logout} style={{'color': 'white'}}>
               Logout
             </Menu.Item>

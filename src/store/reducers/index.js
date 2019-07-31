@@ -9,6 +9,7 @@ import {
   FETCH_SUCCESS,
   FETCH_FAILURE,
   LOGOUT,
+  FETCH_WATCHLIST,
   ADD_TO_WATCHLIST,
   REMOVE_FROM_WATCHLIST,
 } from '../actions/index';
@@ -20,7 +21,7 @@ export const initialState = {
   isRegistered: false,
   isFetching: false,
   //isSaving: false,
-  watchList: [],
+  watchlist: [],
   error: null,
   isLoggedIn: false
 }
@@ -96,6 +97,11 @@ export const reducer = (state = initialState, action) => {
         error: null,
         isLoggedIn: false
       }
+    case FETCH_WATCHLIST: 
+      return {
+        ...state,
+        watchlist: action.payload
+      }  
     case ADD_TO_WATCHLIST:
       return {
         ...state,

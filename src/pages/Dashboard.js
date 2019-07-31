@@ -1,14 +1,32 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import { connect } from 'react-redux';
+import { fetch, addToWatchlist } from '../store/actions/index';
 import Search from "../components/Search/Search";
 import Cards from "../components/Cards/Cards";
 
 import { Grid } from "semantic-ui-react";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+  const [savedTrial, setSavedTrial] = useLocalStorage('watchlist', [])
+
+  useEffect(() => {
+    props.fetch();
+}, [])
+  
   const searchContainerStyles = {
     marginTop: "4rem"
   };
+
+  const addTrial = (event, trial) => {
+    event.preventDefault();
+    props.addToWatchlist(trial);
+  }
+
+  useEffect(() => {
+    setSavedTrial(props.watchlist)
+  }, [props.watchlist])
+
   return (
     <div>
       <Grid textAlign="center" style={searchContainerStyles}>
@@ -16,9 +34,14 @@ const Dashboard = () => {
           <Search />
         </Grid.Column>
       </Grid>
-      <Cards />
+      <Cards trials={props.trials} addTrial={addTrial}/>
     </div>
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => ({
+  trials: state.trials,
+  watchlist: state.watchlist
+})
+
+export default connect(mapStateToProps, { fetch, addToWatchlist })(Dashboard);
