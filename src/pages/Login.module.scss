@@ -1,0 +1,22 @@
+@import "../assets/styles/theme.module.scss";
+
+.loginCard {
+  width: 100% !important;
+  text-align: left;
+  .headerContainer {
+    background-color: $secondaryColor !important;
+    .header {
+      font-family: $headingFont !important;
+      color: #ffffff !important;
+    }
+  }
+  .loginForm {
+    label,
+    .buttons {
+      font-family: $bodyFont;
+    }
+    label {
+      color: $accentColor !important;
+    }
+  }
+}

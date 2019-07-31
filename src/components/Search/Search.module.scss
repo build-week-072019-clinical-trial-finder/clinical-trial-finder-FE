@@ -1,0 +1,7 @@
+@import "../../assets/styles/theme.module.scss";
+.searchForm {
+  width: 100% !important;
+  .buttons {
+    background-color: $buttonColor;
+  }
+}

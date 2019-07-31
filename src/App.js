@@ -9,9 +9,12 @@ import Dashboard from "./pages/Dashboard"
 import './App.css';
 
 
+import styles from "./assets/styles/theme.module.scss";
+// import "./App.css";
+
 const App = () => {
   return (
-    <div className="App">
+    <div className={styles.app}>
       <Navbar />
       <div className='App-content'>
         <Route exact path='/' component={Home} /> 
@@ -19,8 +22,9 @@ const App = () => {
         <Route path="/login" component={Login} />
         <PrivateRoute path="/Dashboard" component={Dashboard} />
       </div>
+
     </div>
   );
-}
+};
 
 export default App;
