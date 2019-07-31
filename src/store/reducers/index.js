@@ -89,7 +89,9 @@ export const reducer = (state = initialState, action) => {
         trials: [],
         isLoggingIn: false,
         isRegistering: false,
+        isRegistered: false,
         isFetching: false,
+        watchList: [],
         error: null,
         isLoggedIn: false
       }
