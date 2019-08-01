@@ -9,6 +9,8 @@ import {
   List
 } from "semantic-ui-react";
 
+import "../Cards/cards.css"
+
 const TrialFilter = ({ trials, filterTrial, resetFilter, isFiltered }) => {
   const conditionToDisplay = 5;
   const [conditions, setCondition] = useState([]);
