@@ -1,5 +1,5 @@
 import axios from "axios";
-//import axiosWithAuth from '../../utilities/axiosWithAuth';
+import axiosWithAuth from '../../utilities/axiosWithAuth';
 
 export const REGISTER_START = 'REGISTER_START';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -41,7 +41,8 @@ export const login = (history, credentials) => (dispatch) => {
       dispatch({
         type: LOGIN_SUCCESS
       })
-      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', response.data.id);
       history.push('/Dashboard')
     })
     .catch(error => {
@@ -66,8 +67,8 @@ export const fetch = () => (dispatch) => {
       console.log('fetch trials success: ', response)
       let keys = Object.keys(response.data).filter(item => item !== 'status');
       let ids = Object.keys(response.data[keys[0]]);
-      let data = ids.map(item => ({id: item}));
-      keys.forEach(key => data = data.map(item => ({...item, [key]: response.data[key][item.id]})))
+      let data = ids.map(item => ({trial_id: item}));
+      keys.forEach(key => data = data.map(item => ({...item, [key]: response.data[key][item['trial_id']]})))
       dispatch({
         type: FETCH_SUCCESS,
         payload: data 
@@ -90,30 +91,113 @@ export const logout = () => (dispatch) => {
   })
 }
 
-export const FETCH_WATCHLIST = 'FETCH_WATCHLIST';
+export const FETCH_WATCHLIST_START = 'FETCH_WATCHLIST_START';
+export const FETCH_WATCHLIST_SUCCESS = 'FETCH_WATCHLIST_SUCCESS';
+export const FETCH_WATCHLIST_FAILTURE = 'FETCH_WATCHLIST_FAILURE';
 
 export const fetchWatchlist = () => (dispatch) => {
-  let savedList = JSON.parse(localStorage.getItem('watchlist')) || [];
+  let userId = localStorage.getItem('userId');
   dispatch({
-    type: FETCH_WATCHLIST,
-    payload: savedList
+    type: FETCH_WATCHLIST_START
   })
+  axiosWithAuth().get(`https://clincal-trials.herokuapp.com/api/users/${userId}/watchlist`)
+    .then(response => {
+      console.log('fetch watchlist success: ', response)
+      dispatch({
+        type: FETCH_WATCHLIST_SUCCESS,
+        payload: response.data
+      })
+    })
+    .catch(error => {
+      console.log('fetch watchlist failure: ', error)
+      dispatch({
+        type: FETCH_WATCHLIST_FAILTURE,
+        payload: 'Error fetching watchlist'
+      })
+    })
 }
 
-export const ADD_TO_WATCHLIST = 'ADD_TO_WATCHLIST';
+export const ADD_WATCHLIST_START = 'ADD_WATCHLIST_START';
+export const ADD_WATCHLIST_SUCCESS = 'ADD_WATCHLIST_SUCCESS';
+export const ADD_WATCHLIST_FAILURE = 'ADD_WATCHLIST_FAILURE';
 
 export const addToWatchlist = (trial) => (dispatch) => {
+  let userId = parseInt(localStorage.getItem('userId'));
+  let trialToAdd = {...trial}
+  delete trialToAdd['trial_id'];
+  delete trialToAdd['intervention_name'];
+  trialToAdd = {...trialToAdd, users_id: userId}
+  console.log(trialToAdd)
   dispatch({
-    type: ADD_TO_WATCHLIST,
-    payload: trial
+    type: ADD_WATCHLIST_START
   })
+  axiosWithAuth().post(`https://clincal-trials.herokuapp.com/api/watchlist`, trialToAdd)
+    .then(response => {
+      console.log('fetch watchlist success: ', response)
+      dispatch({
+        type: ADD_WATCHLIST_SUCCESS,
+      })
+      return axiosWithAuth().get(`https://clincal-trials.herokuapp.com/api/users/${userId}/watchlist`)
+      .then(response => {
+        console.log('fetch watchlist success: ', response)
+        dispatch({
+          type: FETCH_WATCHLIST_SUCCESS,
+          payload: response.data
+        })
+      })
+      .catch(error => {
+        console.log('fetch watchlist failure: ', error)
+        dispatch({
+          type: FETCH_WATCHLIST_FAILTURE,
+          payload: 'Error fetching watchlist'
+        })
+      })
+    })
+    .catch(error => {
+      console.log('fetch watchlist failure: ', error)
+      dispatch({
+        type: ADD_WATCHLIST_FAILURE,
+        payload: 'Error adding trial to watchlist'
+      })
+    })
 }
 
-export const REMOVE_FROM_WATCHLIST = 'REMOVE_FROM_WATCHLIST';
+export const REMOVE_WATCHLIST_START = 'REMOVE_WATCHLIST_START';
+export const REMOVE_WATCHLIST_SUCCESS = 'REMOVE_WATCHLIST_SUCCESS';
+export const REMOVE_WATCHLIST_FAILURE = 'REMOVE_WATCHLIST_FAILURE';
 
 export const removeFromWatchlist = (trial) => (dispatch) => {
+  let userId = localStorage.getItem('userId');
   dispatch({
-    type: REMOVE_FROM_WATCHLIST,
-    payload: trial.id
+    type: REMOVE_WATCHLIST_START
   })
+  axiosWithAuth().delete(`https://clincal-trials.herokuapp.com/api/watchlist/${trial.id}`)
+    .then(response => {
+      console.log('fetch watchlist success: ', response)
+      dispatch({
+        type: REMOVE_WATCHLIST_SUCCESS
+      })
+      return axiosWithAuth().get(`https://clincal-trials.herokuapp.com/api/users/${userId}/watchlist`)
+      .then(response => {
+        console.log('fetch watchlist success: ', response)
+        dispatch({
+          type: FETCH_WATCHLIST_SUCCESS,
+          payload: response.data
+        })
+      })
+      .catch(error => {
+        console.log('fetch watchlist failure: ', error)
+        dispatch({
+          type: FETCH_WATCHLIST_FAILTURE,
+          payload: 'Error fetching watchlist'
+        })
+      })
+    })
+    .catch(error => {
+      console.log('fetch watchlist failure: ', error)
+      dispatch({
+        type: REMOVE_WATCHLIST_FAILURE,
+        payload: 'Error removing trial from watchlist'
+      })
+    })
 }
