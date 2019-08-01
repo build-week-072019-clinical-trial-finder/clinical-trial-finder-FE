@@ -18,7 +18,7 @@ const Cards = props => {
     <div>
       <h1>Clinical Trial</h1>
       {props.trials.map((item, id) => (
-        <Card.Group centered>
+        <Card.Group centered key={id}>
           <Card fluid>
             <Title title={item["brief_title"]} key={Math.random()} />
             <Summary summary={item["brief_summary"]} key={Math.random()} />

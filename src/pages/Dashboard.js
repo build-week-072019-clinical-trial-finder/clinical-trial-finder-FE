@@ -4,15 +4,38 @@ import { connect } from "react-redux";
 import { fetch, addToWatchlist } from "../store/actions/index";
 import Search from "../components/Search/Search";
 import Cards from "../components/Cards/Cards";
+import TrialFilter from "../components/TrialFilter/TrialFilter";
 
-import { Card, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 const Dashboard = props => {
   const [savedTrial, setSavedTrial] = useLocalStorage("watchlist", []);
-
+  const [trialList, setTrialList] = useState([]);
+  const [intervention, setIntervention] = useState("");
+  const [filteredList, setFilteredList] = useState([]);
   useEffect(() => {
     props.fetch();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    setTrialList(props.trials);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
+
+  useEffect(() => {
+    let filtered = trialList;
+    if (intervention && intervention !== "reset") {
+      filtered = trialList.filter(trial => {
+        return trial.intervention_name === intervention;
+      });
+    } else {
+      filtered = trialList;
+    }
+
+    setFilteredList(filtered);
+  }, [intervention, trialList]);
 
   const searchContainerStyles = {
     marginTop: "4rem"
@@ -23,18 +46,41 @@ const Dashboard = props => {
     props.addToWatchlist(trial);
   };
 
+  const filterTrial = intervention => {
+    const actualIntervention =
+      intervention === "Intervention Not Available" ? "null" : intervention;
+    setIntervention(actualIntervention);
+  };
+
+  const resetFilter = () => {
+    setIntervention("reset");
+  };
+
   useEffect(() => {
     setSavedTrial(props.watchlist);
   }, [props.watchlist, setSavedTrial]);
 
   return (
     <div>
-      <Grid textAlign="center" style={searchContainerStyles}>
+      <Grid container textAlign="center" style={searchContainerStyles}>
         <Grid.Column>
           <Search />
         </Grid.Column>
       </Grid>
-      <Cards trials={props.trials} addTrial={addTrial} />
+      <Grid container stackable>
+        <Grid.Column width={4}>
+          <TrialFilter
+            trials={props.trials}
+            filterTrial={filterTrial}
+            resetFilter={resetFilter}
+          />
+        </Grid.Column>
+        <Grid.Column width={12}>
+          {trialList.length > 0 ? (
+            <Cards trials={filteredList} addTrial={addTrial} />
+          ) : null}
+        </Grid.Column>
+      </Grid>
     </div>
   );
 };
