@@ -5,14 +5,14 @@ import City from "./City"
 import Country from "./Country"
 import State from "./State"
 import Summary from "./Summary"
-import Phase from "./Phase"
-import InverventionName from "./InterventionName"
+import Probability from "./Probability"
+import Url from "./Url"
 
 import { Card, Button } from 'semantic-ui-react'
 import './cards.css'
 
 const Cards = (props) => {
-    //console.log('props',props.trials);
+    console.log('props',props.trials);
     
     return(
         <div>
@@ -24,8 +24,11 @@ const Cards = (props) => {
                         <Summary summary={item['brief_summary']} key={Math.random()} />
                     <div className="flex-box1">
                         <Condition condition={item['condition']} key={Math.random()} />
-                        <Phase phase={item['phase']} key={Math.random()} />
-                        <InverventionName intervention={item['intervention_name']} key={Math.random()} />
+                        <Probability probability={item['probability']} key={Math.random()} />
+                        
+                    </div>
+                    <div className="url-button">
+                        <Url url={item['url']} key={Math.random()} />
                     </div>
                         <Card.Content>   
                             <div className="flex-box2">
