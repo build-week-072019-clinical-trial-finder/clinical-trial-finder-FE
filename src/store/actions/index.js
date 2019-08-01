@@ -123,14 +123,15 @@ export const ADD_WATCHLIST_FAILURE = 'ADD_WATCHLIST_FAILURE';
 
 export const addToWatchlist = (trial) => (dispatch) => {
   let userId = parseInt(localStorage.getItem('userId'));
-  let trialToAdd = {...trial};
+  let trialToAdd = {...trial}
   delete trialToAdd['trial_id'];
   delete trialToAdd['intervention_name'];
-  //delete trialToAdd['brief_summary'];
+  trialToAdd = {...trialToAdd, users_id: userId}
+  console.log(trialToAdd)
   dispatch({
     type: ADD_WATCHLIST_START
   })
-  axiosWithAuth().post(`https://clincal-trials.herokuapp.com/api/watchlist`, {...trialToAdd, users_id: userId})
+  axiosWithAuth().post(`https://clincal-trials.herokuapp.com/api/watchlist`, trialToAdd)
     .then(response => {
       console.log('fetch watchlist success: ', response)
       dispatch({
@@ -198,15 +199,5 @@ export const removeFromWatchlist = (trial) => (dispatch) => {
         type: REMOVE_WATCHLIST_FAILURE,
         payload: 'Error removing trial from watchlist'
       })
-    })
-}
-
-export const check = () => (dispatch) => {
-  axiosWithAuth().get(`https://clincal-trials.herokuapp.com/api/users`)
-    .then(response => {
-      console.log('test success:', response)
-    })
-    .catch(error => {
-      console.log('test failure:', error)
     })
 }

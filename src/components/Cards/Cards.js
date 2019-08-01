@@ -50,7 +50,7 @@ const Cards = (props) => {
                                         style={{background: '#b80c09', color: '#ffffff'}} 
                                         onClick={(event) => props.addTrial(event, item)}/>
                                 : <Button 
-                                    icon='find' 
+                                    icon='trash alternate outline' 
                                     content='Remove from Watchlist' 
                                     style={{background: '#222e50', color: '#ffffff'}} 
                                     onClick={(event) => props.removeTrial(event, item)}/>}
