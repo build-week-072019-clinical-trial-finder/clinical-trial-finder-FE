@@ -8,7 +8,7 @@ import { fetchWatchlist, removeFromWatchlist } from '../store/actions/index';
 import Cards from "../components/Cards/Cards";
 
 const Watchlist = (props) => {
-  const [savedTrial, setSavedTrial] = useLocalStorage('watchlist', [])
+  //const [savedTrial, setSavedTrial] = useLocalStorage('watchlist', [])
 
   useEffect(() => {
     props.fetchWatchlist();
@@ -18,10 +18,11 @@ const Watchlist = (props) => {
     event.preventDefault();
     props.removeFromWatchlist(trialId);
   }
-
+  /*
   useEffect(() => {
     setSavedTrial(props.watchlist)
   }, [props.watchlist])
+  */
 
   return (
     <div>

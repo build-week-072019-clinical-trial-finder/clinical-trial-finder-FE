@@ -9,9 +9,15 @@ import {
   FETCH_SUCCESS,
   FETCH_FAILURE,
   LOGOUT,
-  FETCH_WATCHLIST,
-  ADD_TO_WATCHLIST,
-  REMOVE_FROM_WATCHLIST,
+  FETCH_WATCHLIST_START,
+  FETCH_WATCHLIST_SUCCESS,
+  FETCH_WATCHLIST_FAILTURE,
+  ADD_WATCHLIST_START,
+  ADD_WATCHLIST_SUCCESS,
+  ADD_WATCHLIST_FAILURE,
+  REMOVE_WATCHLIST_START,
+  REMOVE_WATCHLIST_SUCCESS,
+  REMOVE_WATCHLIST_FAILURE,
 } from '../actions/index';
 
 export const initialState = {
@@ -20,10 +26,12 @@ export const initialState = {
   isRegistering: false,
   isRegistered: false,
   isFetching: false,
-  //isSaving: false,
-  watchlist: [],
   error: null,
-  isLoggedIn: false
+  isLoggedIn: false,
+  isFetchingWatchlist: false,
+  isAddingWatchlist: false,
+  isRemovingWatchlist: false,
+  watchlist: [],
 }
 
 export const reducer = (state = initialState, action) => {
@@ -96,21 +104,60 @@ export const reducer = (state = initialState, action) => {
         isFetching: false,
         error: null,
         isLoggedIn: false
+      } 
+    case FETCH_WATCHLIST_START:
+      return {
+        ...state,
+        isFetchingWatchlist: true,
+        error: null
       }
-    case FETCH_WATCHLIST: 
+    case FETCH_WATCHLIST_SUCCESS:
       return {
         ...state,
-        watchlist: action.payload
-      }  
-    case ADD_TO_WATCHLIST:
-      return {
-        ...state,
-        watchlist: [...state.watchlist, action.payload]
+        isFetchingWatchlist: false,
+        watchlist: action.payload,
+        error: null
       }
-    case REMOVE_FROM_WATCHLIST:
+    case FETCH_WATCHLIST_FAILTURE:
       return {
         ...state,
-        watchlist: state.watchlist.filter(item => item.id !== action.payload)
+        isFetchingWatchlist: false,
+        error: action.payload
+      }
+    case ADD_WATCHLIST_START:
+      return {
+        ...state,
+        isAddingWatchlist: true
+      }
+    case ADD_WATCHLIST_SUCCESS:
+      return {
+        ...state,
+        isAddingWatchlist: false,
+        error: null
+      }
+    case ADD_WATCHLIST_FAILURE:
+      return {
+        ...state,
+        isAddingWatchlist: false,
+        error: action.payload
+      }
+    case REMOVE_WATCHLIST_START:
+      return {
+        ...state,
+        isRemovingWatchlist: true,
+        error: null
+      }
+    case REMOVE_WATCHLIST_SUCCESS:
+      return {
+        ...state,
+        isRemovingWatchlist: false,
+        error: null
+      }
+    case REMOVE_WATCHLIST_FAILURE:
+      return {
+        ...state,
+        isRemovingWatchlist: false,
+        error: action.payload
       }
     default: 
       return state;

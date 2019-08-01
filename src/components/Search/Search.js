@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Message } from "semantic-ui-react";
+import { Button, Form, Message } from "semantic-ui-react";
 
 import styles from "./Search.module.scss";
 

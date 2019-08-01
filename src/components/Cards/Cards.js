@@ -8,11 +8,11 @@ import Summary from "./Summary"
 import Phase from "./Phase"
 import InverventionName from "./InterventionName"
 
-import { Card, Button, Header, Table, Icon } from 'semantic-ui-react'
+import { Card, Button } from 'semantic-ui-react'
 import './cards.css'
 
 const Cards = (props) => {
-    console.log('props',props.trials);
+    //console.log('props',props.trials);
     
     return(
         <div>
