@@ -9,6 +9,8 @@ import {
   List
 } from "semantic-ui-react";
 
+import "../Cards/cards.css"
+
 const TrialFilter = ({ trials, filterTrial, resetFilter, isFiltered }) => {
   const interventionToDisplay = 2;
   const [interventions, setIntervention] = useState([]);

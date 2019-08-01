@@ -8,13 +8,17 @@
     margin: auto;
     
 }
+
+.ui.card{
+    margin: auto;
+}
 h1{
     padding-top: 2rem;
     text-align: center;
 }
 
 
-h2{
+h3{
     padding-top: 2rem;
     padding-left: 2rem;
     padding-right: 2rem;
@@ -54,12 +58,14 @@ p{
     
 }
 
-.box{
-   
+.url-button{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
 }
 @media screen and (max-width: 600px) {
-    h2{
-        font-size:1.5rem;
+    h3{
+        font-size:1.2rem;
     }
     p{
         padding-left: 1rem;
@@ -74,5 +80,8 @@ p{
     .flex-box2{
         flex-direction: column;
         align-items: center;
+    }
+    .url-button{
+        margin-top: 10px;
     }
   }
