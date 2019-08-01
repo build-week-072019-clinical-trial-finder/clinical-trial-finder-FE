@@ -58,17 +58,18 @@ export const FETCH_START = 'FETCH_START';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
 
-export const fetch = () => (dispatch) => {
+export const fetch = (searchTerms) => (dispatch) => {
   dispatch({
     type: FETCH_START
   })
-  axios.post('http://clinical-trial-dev.p5ykpijgyk.us-east-2.elasticbeanstalk.com/fetch_data', {})
+  axios.post('http://clinical-trial-final.3jzhwsyenn.us-east-2.elasticbeanstalk.com/fetch_data', {'user_search': searchTerms})
     .then(response => {
       console.log('fetch trials success: ', response)
       let keys = Object.keys(response.data).filter(item => item !== 'status');
-      let ids = Object.keys(response.data[keys[0]]);
+      let ids = Array(response.data[keys[0]].length).fill().map((item, index) => index)
       let data = ids.map(item => ({trial_id: item}));
-      keys.forEach(key => data = data.map(item => ({...item, [key]: response.data[key][item['trial_id']]})))
+      keys.forEach(key => data = data.map(item => ({...item, [key]: response.data[key][item['trial_id']]})));
+      console.log(data)
       dispatch({
         type: FETCH_SUCCESS,
         payload: data 
@@ -125,7 +126,7 @@ export const addToWatchlist = (trial) => (dispatch) => {
   let userId = parseInt(localStorage.getItem('userId'));
   let trialToAdd = {...trial}
   delete trialToAdd['trial_id'];
-  delete trialToAdd['intervention_name'];
+  delete trialToAdd['probability'];
   trialToAdd = {...trialToAdd, users_id: userId}
   console.log(trialToAdd)
   dispatch({
