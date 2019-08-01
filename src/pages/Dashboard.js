@@ -13,15 +13,13 @@ const Dashboard = props => {
   const [trialList, setTrialList] = useState([]);
   const [intervention, setIntervention] = useState("");
   const [filteredList, setFilteredList] = useState([]);
+
   useEffect(() => {
     props.fetch();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     setTrialList(props.trials);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   useEffect(() => {
@@ -30,8 +28,6 @@ const Dashboard = props => {
       filtered = trialList.filter(trial => {
         return trial.intervention_name === intervention;
       });
-    } else {
-      filtered = trialList;
     }
 
     setFilteredList(filtered);
@@ -73,6 +69,7 @@ const Dashboard = props => {
             trials={props.trials}
             filterTrial={filterTrial}
             resetFilter={resetFilter}
+            isFiltered={props.trials.length > filteredList.length}
           />
         </Grid.Column>
         <Grid.Column width={12}>

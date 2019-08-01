@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Header, Grid, List } from "semantic-ui-react";
+import {
+  Button,
+  Card,
+  Container,
+  Header,
+  Icon,
+  Grid,
+  List
+} from "semantic-ui-react";
 
-const TrialFilter = ({ trials, filterTrial, resetFilter }) => {
+const TrialFilter = ({ trials, filterTrial, resetFilter, isFiltered }) => {
+  const interventionToDisplay = 2;
   const [interventions, setIntervention] = useState([]);
+  const [displayingInterventions, setDisplayingInterventions] = useState([]);
 
+  /* Performs array functions on the trial list to extract unique intervention property */
   useEffect(() => {
     let filtered = trials.map(trial => {
       return trial.intervention_name;
@@ -21,6 +32,32 @@ const TrialFilter = ({ trials, filterTrial, resetFilter }) => {
     setIntervention(unique);
   }, [trials]);
 
+  /* Limiting the intervention list to contain only 5 intervention initially */
+  useEffect(() => {
+    const displaying = interventions.slice(0, interventionToDisplay);
+    setDisplayingInterventions(displaying);
+  }, [interventions]);
+
+  /* Expand the intervention list to contain more interventions */
+  const loadMoreInterventions = () => {
+    const displayingNumber = displayingInterventions.length;
+
+    const moreInterventions = interventions.slice(
+      0,
+      displayingNumber + interventionToDisplay
+    );
+
+    setDisplayingInterventions(moreInterventions);
+  };
+
+  const loadLessInterventions = () => {
+    const displayingNumber = displayingInterventions.length;
+    const lessInterventions = interventions.slice(
+      0,
+      displayingNumber - interventionToDisplay
+    );
+    setDisplayingInterventions(lessInterventions);
+  };
   return (
     <div>
       <h1>Filters</h1>
@@ -32,17 +69,19 @@ const TrialFilter = ({ trials, filterTrial, resetFilter }) => {
                 <Header>By Interventions</Header>
               </Grid.Column>
               <Grid.Column width={6}>
-                <Button as="a" size="small" onClick={resetFilter}>
-                  Reset
-                </Button>
+                {isFiltered ? (
+                  <Button as="a" size="small" onClick={resetFilter}>
+                    Reset
+                  </Button>
+                ) : null}
               </Grid.Column>
             </Grid.Row>
           </Grid>
         </Card.Content>
         <Card.Content>
           <List bulleted divided>
-            {interventions.length > 0
-              ? interventions.map((intervention, index) => (
+            {displayingInterventions.length > 0
+              ? displayingInterventions.map((intervention, index) => (
                   <List.Item
                     key={index}
                     as="h4"
@@ -53,6 +92,18 @@ const TrialFilter = ({ trials, filterTrial, resetFilter }) => {
                 ))
               : ""}
           </List>
+          <Container textAlign="center" style={{ marginTop: "30px" }}>
+            {interventions.length > displayingInterventions.length ? (
+              <Button primary onClick={loadMoreInterventions}>
+                <Button.Content visible>More</Button.Content>
+              </Button>
+            ) : null}
+            {displayingInterventions.length > interventionToDisplay ? (
+              <Button secondary onClick={loadLessInterventions}>
+                <Button.Content visible>Less</Button.Content>
+              </Button>
+            ) : null}
+          </Container>
         </Card.Content>
       </Card>
     </div>
