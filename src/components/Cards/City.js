@@ -3,7 +3,7 @@ import React from "react";
 const City = (props) => {
     
     return (
-        <h5>{props.city},</h5>
+        <h5>{props.city === 'Missing' ? 'Unknown' : props.city},</h5>
     )
 }
 
