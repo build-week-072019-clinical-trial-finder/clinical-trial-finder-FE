@@ -13,7 +13,6 @@ const Dashboard = props => {
   const [filteredList, setFilteredList] = useState([]);
 
   useEffect(() => {
-    props.fetch();
     props.fetchWatchlist();
   }, [])
 
@@ -51,11 +50,16 @@ const Dashboard = props => {
     setIntervention("reset");
   };
 
+  const fetchTrials = (event, input) => {
+    event.preventDefault();
+    props.fetch(input)
+  }
+
   return (
     <div>
       <Grid container textAlign="center" style={searchContainerStyles}>
         <Grid.Column>
-          <Search />
+          <Search fetchTrials={fetchTrials}/>
         </Grid.Column>
       </Grid>
       <Grid container stackable>

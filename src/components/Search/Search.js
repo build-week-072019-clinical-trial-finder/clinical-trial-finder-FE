@@ -3,8 +3,8 @@ import { Button, Form, Message } from "semantic-ui-react";
 
 import styles from "./Search.module.scss";
 
-const Search = () => {
-  const [query, setQuery] = useState({ trial: "" });
+const Search = (props) => {
+  const [query, setQuery] = useState('');
 
   const [queryErrors, setQueryErrors] = useState("");
 
@@ -13,7 +13,7 @@ const Search = () => {
     if (queryErrors.length > 0) {
       setQueryErrors("");
     }
-    setQuery({ ...query, trial: value });
+    setQuery(value);
   };
 
   const handleSubmitForm = event => {
@@ -22,7 +22,7 @@ const Search = () => {
     if (validateForm()) {
       console.log("Valid Form");
       /* IMPORTANT - Provide an API call here */
-
+      props.fetchTrials(event, query)
       resetForm();
     }
   };
@@ -30,7 +30,7 @@ const Search = () => {
   const validateForm = () => {
     let valid = true;
 
-    if (!query.trial) {
+    if (!query) {
       setQueryErrors("Invalid search keyword(s)");
       valid = false;
     }
