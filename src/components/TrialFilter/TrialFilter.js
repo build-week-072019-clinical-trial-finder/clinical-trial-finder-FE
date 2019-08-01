@@ -10,54 +10,55 @@ import {
 } from "semantic-ui-react";
 
 const TrialFilter = ({ trials, filterTrial, resetFilter, isFiltered }) => {
-  const interventionToDisplay = 2;
-  const [interventions, setIntervention] = useState([]);
-  const [displayingInterventions, setDisplayingInterventions] = useState([]);
+  const conditionToDisplay = 5;
+  const [conditions, setCondition] = useState([]);
+  const [displayingConditions, setDisplayingConditions] = useState([]);
 
   /* Performs array functions on the trial list to extract unique intervention property */
   useEffect(() => {
     let filtered = trials.map(trial => {
-      return trial.intervention_name;
+      return trial.condition;
     });
 
     let unique = filtered
-      .filter((intervention, index) => {
-        return filtered.indexOf(intervention) === index;
+      .filter((condition, index) => {
+        return filtered.indexOf(condition) === index;
       })
       .map(data => {
-        return data === "null" ? "Intervention Not Available" : data;
+        return data === "null" ? "Condition Not Available" : data;
       })
       .sort();
 
-    setIntervention(unique);
+    setCondition(unique);
   }, [trials]);
 
   /* Limiting the intervention list to contain only 5 intervention initially */
   useEffect(() => {
-    const displaying = interventions.slice(0, interventionToDisplay);
-    setDisplayingInterventions(displaying);
-  }, [interventions]);
+    const displaying = conditions.slice(0, conditionToDisplay);
+    setDisplayingConditions(displaying);
+  }, [conditions]);
 
   /* Expand the intervention list to contain more interventions */
-  const loadMoreInterventions = () => {
-    const displayingNumber = displayingInterventions.length;
+  const loadMoreConditions = () => {
+    const displayingNumber = displayingConditions.length;
 
-    const moreInterventions = interventions.slice(
+    const moreConditions = conditions.slice(
       0,
-      displayingNumber + interventionToDisplay
+      displayingNumber + conditionToDisplay
     );
 
-    setDisplayingInterventions(moreInterventions);
+    setDisplayingConditions(moreConditions);
   };
 
-  const loadLessInterventions = () => {
-    const displayingNumber = displayingInterventions.length;
-    const lessInterventions = interventions.slice(
+  const loadLessConditions = () => {
+    const displayingNumber = displayingConditions.length;
+    const lessConditions = conditions.slice(
       0,
-      displayingNumber - interventionToDisplay
+      displayingNumber - conditionToDisplay
     );
-    setDisplayingInterventions(lessInterventions);
+    setDisplayingConditions(lessConditions);
   };
+
   return (
     <div>
       <h1>Filters</h1>
@@ -66,7 +67,7 @@ const TrialFilter = ({ trials, filterTrial, resetFilter, isFiltered }) => {
           <Grid>
             <Grid.Row>
               <Grid.Column width={10}>
-                <Header>By Interventions</Header>
+                <Header>By Conditions</Header>
               </Grid.Column>
               <Grid.Column width={6}>
                 {isFiltered ? (
@@ -80,26 +81,26 @@ const TrialFilter = ({ trials, filterTrial, resetFilter, isFiltered }) => {
         </Card.Content>
         <Card.Content>
           <List bulleted divided>
-            {displayingInterventions.length > 0
-              ? displayingInterventions.map((intervention, index) => (
+            {displayingConditions.length > 0
+              ? displayingConditions.map((condition, index) => (
                   <List.Item
                     key={index}
                     as="h4"
-                    onClick={() => filterTrial(intervention)}
+                    onClick={() => filterTrial(condition)}
                   >
-                    <List.Header as="a">{intervention}</List.Header>
+                    <List.Header as="a">{condition}</List.Header>
                   </List.Item>
                 ))
               : ""}
           </List>
           <Container textAlign="center" style={{ marginTop: "30px" }}>
-            {interventions.length > displayingInterventions.length ? (
-              <Button primary onClick={loadMoreInterventions}>
+            {conditions.length > displayingConditions.length ? (
+              <Button primary onClick={loadMoreConditions}>
                 <Button.Content visible>More</Button.Content>
               </Button>
             ) : null}
-            {displayingInterventions.length > interventionToDisplay ? (
-              <Button secondary onClick={loadLessInterventions}>
+            {displayingConditions.length > conditionToDisplay ? (
+              <Button secondary onClick={loadLessConditions}>
                 <Button.Content visible>Less</Button.Content>
               </Button>
             ) : null}

@@ -9,7 +9,7 @@ import { Grid, Dimmer, Loader, Image, Container} from "semantic-ui-react";
 
 const Dashboard = props => {
   const [trialList, setTrialList] = useState([]);
-  const [intervention, setIntervention] = useState("");
+  const [condition, setCondition] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
   useEffect(() => {
@@ -22,14 +22,14 @@ const Dashboard = props => {
 
   useEffect(() => {
     let filtered = trialList;
-    if (intervention && intervention !== "reset") {
+    if (condition && condition !== "reset") {
       filtered = trialList.filter(trial => {
-        return trial.intervention_name === intervention;
+        return trial.condition === condition;
       });
     }
 
     setFilteredList(filtered);
-  }, [intervention, trialList]);
+  }, [condition, trialList]);
 
   const searchContainerStyles = {
     marginTop: "4rem"
@@ -40,14 +40,12 @@ const Dashboard = props => {
     props.addToWatchlist(trial);
   };
 
-  const filterTrial = intervention => {
-    const actualIntervention =
-      intervention === "Intervention Not Available" ? "null" : intervention;
-    setIntervention(actualIntervention);
+  const filterTrial = condition => {
+    setCondition(condition);
   };
 
   const resetFilter = () => {
-    setIntervention("reset");
+    setCondition("reset");
   };
 
   const fetchTrials = (event, input) => {
