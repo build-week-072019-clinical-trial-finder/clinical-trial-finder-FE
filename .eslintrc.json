@@ -1,0 +1,19 @@
+{
+  "extends": ["eslint:recommended"],
+  "rules": {
+    "react-hooks/rules-of-hooks": 2,
+    "react-hooks/exhaustive-deps": 1
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "env": {
+      "es6": true,
+      "browser": true,
+      "node": true
+    }
+  }
+}
