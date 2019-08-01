@@ -20,7 +20,7 @@ const Cards = (props) => {
             {props.trials.map((item, id) => (
                 <Card.Group centered>
                     <Card fluid>
-                        <Title title={item['brief_title']} key={Math.random()} />
+                        <Title title={item['official_title']} key={Math.random()} />
                         <Summary summary={item['brief_summary']} key={Math.random()} />
                     <div className="flex-box1">
                         <Condition condition={item['condition']} key={Math.random()} />
