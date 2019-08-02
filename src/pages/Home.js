@@ -1,10 +1,15 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Button } from 'semantic-ui-react'
 
 import '../pages/home.css'
 
-const Home = () => {
+const Home = (props) => {
+  let token = localStorage.getItem('token');
+  if (token) {
+    props.history.push('/Dashboard')
+  }
+
   return (
     <div className="home">
       <div className="h1">
@@ -23,4 +28,4 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default withRouter(Home);

@@ -16,7 +16,7 @@ const Cards = (props) => {
     
     return(
         <div>
-            <h1>Clinical Trial</h1>
+            <h1>{props.header}</h1>
             {props.trials.map((item, id) => (
                 <Card.Group centered>
                     <Card fluid>
@@ -24,7 +24,7 @@ const Cards = (props) => {
                         <Summary summary={item['brief_summary']} key={Math.random()} />
                     <div className="flex-box1">
                         <Condition condition={item['condition']} key={Math.random()} />
-                        <Probability probability={item['probability']} key={Math.random()} />
+                        {item.probability && <Probability probability={item['probability']} key={Math.random()} />}
                         
                     </div>
                     <div className="url-button">

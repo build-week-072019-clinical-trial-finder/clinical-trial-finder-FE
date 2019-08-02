@@ -9,11 +9,8 @@ import {
   Card,
   Header,
   Form,
-  Message,
-  Segment,
-  Dimmer, 
+  Message, 
   Loader,
-  Image
 } from "semantic-ui-react";
 
 const Registration = props => {
@@ -146,13 +143,7 @@ const Registration = props => {
             <Button className={styles.buttons} size="large" type="submit">
               Register
             </Button>
-            {props.isRegistering && 
-              (<Segment>
-                <Dimmer active inverted>
-                  <Loader inverted>Registering</Loader>
-                </Dimmer>
-                <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-              </Segment>)}
+            {props.isRegistering && <Loader active inline='centered'>Registering</Loader>}
           </Form>
         </Card.Content>
       </Card>

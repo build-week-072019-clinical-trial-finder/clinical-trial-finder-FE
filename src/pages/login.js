@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../store/actions/index";
 
-import { Button, Card, Header, Grid, Form, Message, Segment, Dimmer, Loader, Image } from "semantic-ui-react";
+import { Button, Card, Header, Grid, Form, Message, Loader } from "semantic-ui-react";
 
 // import "../pages/login.css";
 import styles from "./Login.module.scss";
@@ -74,13 +74,7 @@ const Login = props => {
               <Button className={styles.buttons} type="submit">
                 Submit
               </Button>
-              {props.isLoggingIn && 
-              (<Segment>
-                <Dimmer active inverted>
-                  <Loader inverted>Signing In</Loader>
-                </Dimmer>
-                <Image src='https://react.semantic-ui.com/images/wireframe/short-paragraph.png' />
-              </Segment>)}
+              {props.isLoggingIn && <Loader active inline='centered'>Signing In</Loader>}
               <Message>
                 Don't have an account? <Link to="/registration">Register</Link>
               </Message>
