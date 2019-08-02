@@ -19,12 +19,12 @@ const Home = props => {
         </h1>
       </div>
       <div className="button">
+
         <Link to="/login">
           <Button fluid color="white">
             Log in
           </Button>{" "}
         </Link>
-
         <br />
         <Link to="/registration">
           <Button fluid color="white">

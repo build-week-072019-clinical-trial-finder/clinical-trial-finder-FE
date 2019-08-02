@@ -10,6 +10,7 @@ export const register = (history, credentials) => dispatch => {
     type: REGISTER_START
   });
   return axios
+
     .post("https://clincal-trials.herokuapp.com/api/register", credentials)
     .then(response => {
       console.log("register user success: ", response);
