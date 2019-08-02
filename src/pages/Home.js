@@ -11,10 +11,10 @@ const Home = () => {
         <h1>Welcome to <br/>Clinical Trial Finder</h1>
       </div>
       <div className="button">
-        <Button fluid color='white'>
+        <Button color='white'>
           <Link to="/login">Login</Link>
-        </Button> <br/>
-        <Button fluid color='white'>
+        </Button> 
+        <Button color='white'>
           <Link to="/registration">Sign Up</Link>
         </Button>
         
