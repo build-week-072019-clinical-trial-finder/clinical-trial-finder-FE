@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink, withRouter, Link } from "react-router-dom";
 import { Menu, Header, Statistic } from "semantic-ui-react";
 import { logout } from '../../store/actions/index';
 import logo from '../../images/logo-white.png';
@@ -25,7 +25,7 @@ const Navbar = (props) => {
     <nav className="navbar">
       <Menu style={{'background': '#007991'}} fixed='top'>
         <Menu.Menu position='left'>
-          <Header as='h3' image={logo} content='Clinical Trial Finder' style={{'color': 'white', 'paddingLeft': '10px'}}/>
+          <Link to='/'><Header as='h3' image={logo} content='Clinical Trial Finder' style={{'color': 'white', 'paddingLeft': '10px'}}/></Link>
         </Menu.Menu>
         {props.isLoggedIn || token ? (
           <Menu.Menu position="right">

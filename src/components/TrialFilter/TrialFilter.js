@@ -4,10 +4,11 @@ import {
   Card,
   Container,
   Header,
-  Icon,
   Grid,
   List
 } from "semantic-ui-react";
+
+import "../Cards/cards.css"
 
 const TrialFilter = ({ trials, filterTrial, resetFilter, isFiltered }) => {
   const conditionToDisplay = 5;

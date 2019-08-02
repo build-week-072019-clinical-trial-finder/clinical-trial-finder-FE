@@ -56,7 +56,7 @@ const Dashboard = props => {
     <div>
       <Grid container textAlign="center" style={searchContainerStyles}>
         <Grid.Column>
-          <Search fetchTrials={fetchTrials} />
+          <Search fetchTrials={fetchTrials} trials={props.trials} />
         </Grid.Column>
       </Grid>
       <Grid container stackable>
@@ -80,7 +80,11 @@ const Dashboard = props => {
             </Container>
           )}
           {trialList.length > 0 ? (
-            <Cards trials={filteredList} addTrial={addTrial} />
+            <Cards
+              header="Clinical Trials Found"
+              trials={filteredList}
+              addTrial={addTrial}
+            />
           ) : null}
         </Grid.Column>
       </Grid>

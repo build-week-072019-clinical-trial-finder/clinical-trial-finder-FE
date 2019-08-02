@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Message } from "semantic-ui-react";
+import { Button, Form, Message, Header } from "semantic-ui-react";
 
 import styles from "./Search.module.scss";
 
@@ -43,17 +43,19 @@ const Search = (props) => {
   };
   return (
     <div>
+
       <Form
         className={styles.searchForm}
         size="big"
         onSubmit={handleSubmitForm}
       >
+        <Header as="h1">{props.trials.length === 0 ? 'Search for clinical trials' : 'Make a new search'}</Header>
         <Form.Input
           type="text"
           name="query"
           value={query.trial}
           onChange={handleInputChange}
-          placeholder="Clinical Trials"
+          placeholder="Enter search terms..."
         />
 
         <Button className={styles.buttons} type="submit" size="large">
@@ -64,7 +66,7 @@ const Search = (props) => {
           <Message
             color="red"
             size="small"
-            header="Invalid search keyword(s)"
+            header="Please enter at least 1 search term"
           ></Message>
         )}
       </Form>
