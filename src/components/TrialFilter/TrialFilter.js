@@ -4,7 +4,6 @@ import {
   Card,
   Container,
   Header,
-  Icon,
   Grid,
   List
 } from "semantic-ui-react";

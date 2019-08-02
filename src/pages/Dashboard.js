@@ -4,7 +4,7 @@ import { fetch, fetchWatchlist, addToWatchlist } from '../store/actions/index';
 import Search from "../components/Search/Search";
 import Cards from "../components/Cards/Cards";
 import TrialFilter from "../components/TrialFilter/TrialFilter";
-import { Grid, Dimmer, Loader, Image, Container} from "semantic-ui-react";
+import { Grid, Dimmer, Loader, Image, Container } from "semantic-ui-react";
 
 
 const Dashboard = props => {
@@ -57,7 +57,7 @@ const Dashboard = props => {
     <div>
       <Grid container textAlign="center" style={searchContainerStyles}>
         <Grid.Column>
-          <Search fetchTrials={fetchTrials}/>
+          <Search fetchTrials={fetchTrials} trials={props.trials}/>
         </Grid.Column>
       </Grid>
       <Grid container stackable>
@@ -79,7 +79,7 @@ const Dashboard = props => {
               </Container>
            )}
           {trialList.length > 0 ? (
-            <Cards trials={filteredList} addTrial={addTrial} />
+            <Cards header='Clinical Trials Found' trials={filteredList} addTrial={addTrial} />
           ) : null}
         </Grid.Column>
       </Grid>

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Grid, Message, Button, Dimmer, Loader, Image, Container } from 'semantic-ui-react';
+import { Grid, Button, Loader, Header, Container } from 'semantic-ui-react';
 import { fetchWatchlist, removeFromWatchlist } from '../store/actions/index';
 import Cards from "../components/Cards/Cards";
 
@@ -17,20 +17,21 @@ const Watchlist = (props) => {
   }
 
   return (
-    <Grid container textAlign="center" style={{paddingTop: '30px'}}>
-      <Button style={{background: '#b80c09', color: '#ffffff', padding: '15px'}}><Link to='/Dashboard' style={{textDecoration: 'none', color: '#ffffff'}}>Back to dashboard</Link></Button>
+    <Grid container textAlign="center">
+      <Grid.Row>
+        <Button style={{background: '#b80c09', color: '#ffffff', padding: '15px', marginTop: '20px'}}><Link to='/Dashboard' style={{textDecoration: 'none', color: '#ffffff'}}>Back to dashboard</Link></Button>
+      </Grid.Row>
+      <Grid.Row>
       {props.isFetchingWatchlist ? (
-        <Container>
-          <Dimmer active inverted>
-            <Loader inverted content='Loading' size='large'/>
-          </Dimmer>
-          <Image src='/images/wireframe/short-paragraph.png' />
+        <Container style={{paddingTop: '30px'}}>
+          <Loader active inline='centered' content='Loading' size='large'/>
         </Container>
       ) : props.watchlist.length === 0 ? 
-        (<Message>
-          <Message.Header>No trials saved in watchlist</Message.Header>
-        </Message>) :
-        (<Cards trials={props.watchlist} removeTrial={removeTrial}/>)}
+        (<Container fluid style={{margin: '10px 0', background: 'white', padding: '20px 30px'}}>
+          <Header>No trials saved in watchlist</Header>
+        </Container>) :
+        (<Cards header='Trials saved in watchlist' trials={props.watchlist} removeTrial={removeTrial}/>)}
+      </Grid.Row>
     </Grid>
   )
 }

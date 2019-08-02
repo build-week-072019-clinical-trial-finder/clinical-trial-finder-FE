@@ -16,7 +16,7 @@ const Cards = (props) => {
     
     return(
         <div>
-            <h1>Clinical Trial</h1>
+            <h1>{props.header}</h1>
             {props.trials.map((item, id) => (
                 <Card.Group centered>
                     <Card fluid>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "semantic-ui-react";
 import RegistrationForm from "../components/RegistrationForm/RegistrationForm";
-import styles from "../assets/styles/theme.module.scss";
+//import styles from "../assets/styles/theme.module.scss";
 const registration = () => {
   return (
     <div>

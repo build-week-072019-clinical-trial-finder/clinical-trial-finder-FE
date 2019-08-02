@@ -11,7 +11,7 @@ import Watchlist from './pages/Watchlist';
 import "./App.css";
 
 const App = () => {
-  
+ 
   return (
     <div className="App">
       <Navbar />
