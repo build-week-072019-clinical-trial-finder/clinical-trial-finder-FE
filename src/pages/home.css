@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     margin: 9rem auto;
-    width: 60%;
+    width: 50%;
     background-color: #007991;
     height: 25rem;
     box-shadow: 5px 10px 8px #888888;
@@ -16,10 +16,13 @@
     
 }
 
-.ui.fluid.button{
-    width: 70%;
-    margin: auto;
-    font-size: 1rem;
+.button{
+    margin: 2rem auto;
+}
+.ui.button{
+    
+    margin-left: 10px;
+    font-size: 1.2rem;
 }
 
 
