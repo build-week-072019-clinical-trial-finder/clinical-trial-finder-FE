@@ -64,11 +64,9 @@ export const fetch = searchTerms => dispatch => {
   dispatch({
     type: FETCH_START
   });
-  /* Old API: http://clinical-trial-final.3jzhwsyenn.us-east-2.elasticbeanstalk.com/fetch_data*/
-  /* New API: http://clinical-trial-final.3jzhwsyenn.us-east-2.elasticbeanstalk.com/fetch_data*/
   axios
     .post(
-      "http://clinical-trial-final.3jzhwsyenn.us-east-2.elasticbeanstalk.com/fetch_data",
+      "https://clinicaltrialadvisor.com/fetch_data",
       { user_search: searchTerms }
     )
     .then(response => {
