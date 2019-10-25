@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetch, fetchWatchlist, addToWatchlist } from "../store/actions/index";
+import background from '../assets/background.svg';
 import Search from "../components/Search/Search";
 import Cards from "../components/Cards/Cards";
 import TrialFilter from "../components/TrialFilter/TrialFilter";
 import { Grid, Dimmer, Loader, Image, Container } from "semantic-ui-react";
+import './Dashboard.scss'
 
 const Dashboard = props => {
   const [trialList, setTrialList] = useState([]);
@@ -53,7 +55,10 @@ const Dashboard = props => {
   };
 
   return (
-    <div>
+    <div className='dashboard' style={{
+      background: `url(${background}) no-repeat top right`,
+      backgroundPosition: '0 50px '
+    }}>
       <Grid container textAlign="center" style={searchContainerStyles}>
         <Grid.Column>
           <Search fetchTrials={fetchTrials} trials={props.trials} />
