@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { NavLink, withRouter, Link } from "react-router-dom";
-import { Menu, Statistic } from "semantic-ui-react";
+import { Menu, Header, Statistic } from "semantic-ui-react";
 import { logout } from '../../store/actions/index';
-import logo from '../../assets/logo.png';
-import './Navbar.scss';
+import logo from '../../images/logo-white.png';
 
 const Navbar = (props) => {
   const [numSavedTrial, setNumSavedTrial] = useState(0);
@@ -23,34 +22,36 @@ const Navbar = (props) => {
   }
 
   return (
-    <Menu fixed='top' secondary className='navbar' style={{background: 'white'}}>
-      <Menu.Menu position='left'>
-        <Link to='/'><img src={logo}/></Link>
-      </Menu.Menu>
-      {props.isLoggedIn || token ? (
-        <Menu.Menu position="right">
-          <Menu.Item as={NavLink} to="/watchlist">
-            Watchlist
-            {numSavedTrial > 0 &&
-              (<Statistic size='mini' style={{ fontSize:'0.3rem', paddingLeft: '5px'}}>
-                <Statistic.Value >{numSavedTrial}</Statistic.Value>
-              </Statistic>)}
-          </Menu.Item>
-          <Menu.Item as={NavLink} to="/" onClick={logout} >
-            Logout
-          </Menu.Item>
+    <nav className="navbar">
+      <Menu style={{'background': '#007991'}} fixed='top'>
+        <Menu.Menu position='left'>
+          <Link to='/'><Header as='h3' image={logo} content='Clinical Trial Finder' style={{'color': 'white', 'paddingLeft': '10px'}}/></Link>
         </Menu.Menu>
-      ) : (
-        <Menu.Menu position="right" >
-          <Menu.Item as={NavLink} to="/login" >
-            Login
-          </Menu.Item>
-          <Menu.Item as={NavLink} to="/registration" >
-            Register
-          </Menu.Item>
-        </Menu.Menu>
-      )}
-    </Menu>
+        {props.isLoggedIn || token ? (
+          <Menu.Menu position="right">
+            <Menu.Item as={NavLink} to="/watchlist" style={{'color': 'white'}}>
+              Watchlist
+              {numSavedTrial > 0 &&
+                (<Statistic size='mini' style={{paddingLeft: '5px'}}>
+                  <Statistic.Value style={{'color': 'white'}}>{numSavedTrial}</Statistic.Value>
+                </Statistic>)}
+            </Menu.Item>
+            <Menu.Item as={NavLink} to="/" onClick={logout} style={{'color': 'white'}}>
+              Logout
+            </Menu.Item>
+          </Menu.Menu>
+        ) : (
+          <Menu.Menu position="right" >
+            <Menu.Item as={NavLink} to="/login" style={{'color': 'white'}}>
+              Login
+            </Menu.Item>
+            <Menu.Item as={NavLink} to="/registration" style={{'color': 'white'}}>
+              Register
+            </Menu.Item>
+          </Menu.Menu>
+        )}
+      </Menu>
+    </nav>
   );
 };
 

@@ -1,4 +1,7 @@
 body {
-  background-color: white;
+  background-color: #b9d6f2;
 }
 
+.App-content {
+  padding-top: 50px;
+}
