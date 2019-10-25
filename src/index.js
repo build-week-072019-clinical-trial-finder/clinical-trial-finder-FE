@@ -8,6 +8,7 @@ import { logger } from "redux-logger";
 import { reducer } from "./store/reducers/index";
 
 import "semantic-ui-css/semantic.min.css";
+import '../src/assets/fonts/stylesheet.css';
 import "./index.css";
 import App from "./App";
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Message, Header } from "semantic-ui-react";
 
-import styles from "./Search.module.scss";
+import "./Search.scss";
 
 const Search = (props) => {
   const [query, setQuery] = useState('');
@@ -43,24 +43,31 @@ const Search = (props) => {
   };
   return (
     <div>
-
       <Form
-        className={styles.searchForm}
+        className='search-form'
         size="big"
         onSubmit={handleSubmitForm}
       >
-        <Header as="h1">{props.trials.length === 0 ? 'Search for clinical trials' : 'Make a new search'}</Header>
-        <Form.Input
-          type="text"
-          name="query"
-          value={query.trial}
-          onChange={handleInputChange}
-          placeholder="Enter search terms..."
-        />
-
-        <Button className={styles.buttons} type="submit" size="large">
-          Search
-        </Button>
+        <Header style={{ fontSize: '4rem', padding: '0'}}>
+          Looking for a clinical trial near you?
+        </Header>
+        <Header style={{ padding: '0.2rem 0 1rem 0' }}>
+          We'll help you break through the complex medical jargon and find a clinical study that you're eligible to join.
+        </Header>
+        <Form.Group>
+          <Form.Input
+            className='search-input'
+            type="text"
+            name="query"
+            value={query.trial}
+            onChange={handleInputChange}
+            placeholder="Medical condition"
+          />
+          <Button className='search-button' type="submit" size="large">
+            FIND A TRIAL
+          </Button>
+        </Form.Group>
+        
 
         {queryErrors.length > 0 && (
           <Message

@@ -1,0 +1,66 @@
+@import '../../assets/styles/variables.scss';
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  text-align: left;
+  margin-top: 12%;
+
+  @media (max-width: 800px) {
+    margin-top: 15%;
+  }
+
+  .header {
+    padding: 0;
+    width: 60%;
+    @include main-font;
+    
+    @media (max-width: 1000px) {
+      width: 80%;
+    }
+
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+
+  }
+
+  .search-input {
+    width: 50%;
+
+    @media (max-width: 1000px) {
+      width: 80%;
+    }
+
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+
+    
+    .input input {
+      border-radius: 30px;
+      border: 1px solid #C5C5C5;
+      @include main-font;
+
+      &:focus {
+        border-radius: 30px;
+      }
+    }
+
+
+  }
+
+  .search-button {
+    background: #1F3345;
+    border-radius: 30px;
+    color: white;
+    @include main-font;
+    font-weight: 300;
+
+    @media (max-width: 800px) {
+      margin: 2rem auto;
+    }
+
+  }
+}
