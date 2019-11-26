@@ -55,7 +55,7 @@ const Search = (props) => {
           name="query"
           value={query.trial}
           onChange={handleInputChange}
-          placeholder="Enter search terms..."
+          placeholder="Enter state or condition"
         />
 
         <Button className={styles.buttons} type="submit" size="large">
